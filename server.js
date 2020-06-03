@@ -43,6 +43,14 @@ const { ApolloServer } = require('apollo-server-express');
 		modules: modules,
 		cache: redisCache,
 		// introspection: true,
+		engine: {
+			// The Graph Manager API key
+			apiKey: process.env.APOLLO_API_KEY,
+			// A tag for this specific environment (e.g. `development` or `production`).
+			// For more information on schema tags/variants, see
+			// https://www.apollographql.com/docs/platform/schema-registry/#associating-metrics-with-a-variant
+			schemaTag: process.env.NODE_ENV,
+		},
 		cacheControl: { defaultMaxAge: 60 * 2 }, // 1hr max age for cache,
 		// tracing: process.env.NODE_ENV === 'development', // Disable for prod as this is very resource intensive
 		// Pass context
