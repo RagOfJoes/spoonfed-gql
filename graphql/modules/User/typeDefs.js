@@ -19,9 +19,15 @@ module.exports = gql`
 		full: String
 	}
 
+	type Users {
+		edges: [User]
+		pageInfo: PageInfo!
+	}
+
 	extend type Query {
-		me: User!
+		me: User
 		getProfile(username: String!): User!
+		userSearch(username: String!, limit: Int!, cursor: ID): Users
 	}
 
 	input EditProfileInput {

@@ -49,23 +49,17 @@ module.exports = gql`
 		pageInfo: PageInfo!
 	}
 
-	input UserRecipesFilterInput {
+	input RecipesFilterInput {
 		likes: IntFilterInput
 		creation: DateFilterInput
 
 		name: StringFilterInput
 	}
 
-	input RecipeSortInput {
-		name: SORT_ORDER
-
-		creation: SORT_ORDER
-	}
-
 	extend type Query {
 		getRecipeDetail(slug: String!): Recipe
-		getAllRecipes(limit: Int!, cursor: ID, sort: RecipeSortInput!, filters: [UserRecipesFilterInput]): Recipes
-		getUserRecipes(user: String!, limit: Int!, cursor: ID, sort: RecipeSortInput!, filters: [UserRecipesFilterInput]): Recipes
+		getAllRecipes(limit: Int!, cursor: ID, sort: CursorSortInput!, filters: [RecipesFilterInput]): Recipes
+		getUserRecipes(user: String!, limit: Int!, cursor: ID, sort: CursorSortInput!, filters: [RecipesFilterInput]): Recipes
 	}
 
 	input RecipeImageInput {

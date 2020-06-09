@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
 const UserModel = require('../../../../db/User');
+const { InvalidUsernameError } = require('../../../errors');
 const { authenticated } = require('../../../authResolvers');
 
 module.exports = {
@@ -11,12 +11,18 @@ module.exports = {
 		return true;
 	},
 	editProfile: authenticated(async (_, { profile }, { req }) => {
-		const edit = await UserModel.findOneAndUpdate({ sub: req.user.sub }, profile, {
-			new: true,
-			upsert: true,
-			omitUndefined: false,
-		});
+		try {
+			const findUser = await UserModel.findOne({ sub: req.user.sub }).lean();
 
-		return edit;
+			if (!findUser) {
+				return await new UserModel({ ...req.user, ...profile }).save();
+			}
+
+			await UserModel.updateOne({ sub: req.user.sub }, profile);
+
+			return findUser;
+		} catch (e) {
+			throw new InvalidUsernameError('Invalid Username!');
+		}
 	}),
 };

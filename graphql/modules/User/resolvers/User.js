@@ -20,7 +20,7 @@ module.exports = {
 			const loadUser = await UserLoader.load(parent.sub);
 
 			return loadUser.bio;
-		} catch {}
+		} catch (e) {}
 
 		const payload = await UserModel.findOne({ $or: [{ sub: parent.sub }, { _id: mongoose.Types.ObjectId(parent.id) }] });
 
@@ -31,7 +31,7 @@ module.exports = {
 			const loadUser = await UserLoader.load(parent.sub);
 
 			return loadUser.avatar;
-		} catch {}
+		} catch (e) {}
 
 		const payload = await UserModel.findOne({ $or: [{ sub: parent.sub }, { _id: mongoose.Types.ObjectId(parent.id) }] });
 
@@ -42,7 +42,7 @@ module.exports = {
 			const loadUser = await UserLoader.load(parent.sub);
 
 			return loadUser.username;
-		} catch {}
+		} catch (e) {}
 
 		const payload = await UserModel.findOne({ $or: [{ sub: parent.sub }, { _id: mongoose.Types.ObjectId(parent.id) }] });
 
