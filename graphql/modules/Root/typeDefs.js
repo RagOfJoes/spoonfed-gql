@@ -18,6 +18,12 @@ module.exports = gql`
 		lastUpdate: Date
 	}
 
+	input CursorSortInput {
+		name: SORT_ORDER
+
+		creation: SORT_ORDER
+	}
+
 	enum SORT_ORDER {
 		ASC
 		DESC
@@ -28,7 +34,7 @@ module.exports = gql`
 		hasNextPage: Boolean!
 	}
 
-	input UserFilterInput {
+	input IdFilterInput {
 		is: ObjectId
 		notIs: ObjectId
 
