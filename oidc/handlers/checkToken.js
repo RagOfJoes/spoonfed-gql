@@ -50,7 +50,7 @@ function checkToken(clientProvider, cache) {
 				if (sub !== user.sub) return next();
 
 				const today = Math.floor(new Date().getTime() / 1000);
-				const oneHourFromNow = today - 1000 * 60 * 60 * 1;
+				const tenMinutesFromNow = today - 600000;
 				// If dates are incorrect or exp have passed
 				if (iat > today || exp < today) {
 					return next();
@@ -64,7 +64,7 @@ function checkToken(clientProvider, cache) {
 
 				if (user.email) cacheValue.email = user.email;
 				// If token still has two hours to live then set to cache
-				if (exp > oneHourFromNow)
+				if (exp > tenMinutesFromNow)
 					await cache.set(cacheKey, JSON.stringify(cacheValue), 'EX', 60 * 10 /** 10 min in seconds */);
 				// < 2 then just set to cache with TTL to the remainder of its lifetime
 				else await cache.set(cacheKey, JSON.stringify(cacheValue), 'EX', exp - today /** Remainder of TTL */);
