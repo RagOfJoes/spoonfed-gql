@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
  * Recipe Schema
  */
 const RecipeSchema = new mongoose.Schema({
-	name: { text: true, type: String, required: true },
+	name: { text: true, type: String, required: true, minlength: 4, maxlength: 60 },
 	servings: { type: String, required: true },
 	ingredients: [{ type: String, required: true }],
 	instructions: [{ type: String, required: true }],

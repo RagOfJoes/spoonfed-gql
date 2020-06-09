@@ -39,11 +39,18 @@ const UserSchema = new mongoose.Schema({
 		maxlength: 120,
 	},
 	username: {
+		text: true,
 		index: true,
 		unique: true,
 		type: String,
 		minlength: 4,
 		maxlength: 16,
+		// Creates a case
+		// insensitive index
+		collation: {
+			strength: 2,
+			locale: 'en',
+		},
 	},
 });
 
