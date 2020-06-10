@@ -42,6 +42,9 @@ const { ApolloServer } = require('apollo-server-express');
 	const server = new ApolloServer({
 		modules: modules,
 		cache: redisCache,
+		debug: process.env.NODE_ENV === 'development',
+		tracing: process.env.NODE_ENV === 'development',
+		introspection: process.env.NODE_ENV === 'development',
 		// introspection: true,
 		engine: {
 			// The Graph Manager API key
