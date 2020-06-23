@@ -17,6 +17,7 @@ module.exports = {
 				Key: filename,
 				ACL: 'public-read',
 				ContentType: filetype,
+				CacheControl: 'max-age=1945975',
 				Bucket: process.env.AWS_S3_BUCKET,
 			};
 			const signedUrl = await s3.getSignedUrlPromise('putObject', params);
@@ -47,6 +48,7 @@ module.exports = {
 						Key: filename,
 						ACL: 'public-read',
 						ContentType: filetype,
+						CacheControl: 'max-age=1945975',
 						Bucket: process.env.AWS_S3_BUCKET,
 					};
 					const signedUrl = await s3.getSignedUrlPromise('putObject', params);
