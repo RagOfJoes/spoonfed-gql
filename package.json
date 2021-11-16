@@ -28,7 +28,7 @@
 	"dependencies": {
 		"apollo-server-cache-redis": "^1.2.0",
 		"apollo-server-express": "^2.14.2",
-		"aws-sdk": "^2.678.0",
+		"aws-sdk": "^2.814.0",
 		"cookie-parser": "^1.4.5",
 		"cuid": "^2.1.8",
 		"dataloader": "^2.0.0",
